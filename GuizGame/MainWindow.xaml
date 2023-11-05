@@ -1,0 +1,82 @@
+﻿<Window x:Class="GuizGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuizGame"
+        mc:Ignorable="d"
+
+        Title="StartMenu" Height="450" Width="800" Background="Coral">
+    <Grid x:Name="StartMenu">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Grid.Column="1" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="1" 
+            Text="QUIZ GAME" 
+            FontSize="50" 
+            FontWeight="Bold" 
+            HorizontalAlignment="Center" 
+            Margin="0,0,0,50"/>
+        <Button 
+            x:Name="btnSetupQuiz" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            Content="Play Quiz" 
+            FontSize="30" 
+            FontWeight="UltraBlack" 
+            Width="250" 
+            HorizontalAlignment="Center" 
+            Margin="0,10" 
+            Click="btnSetupQuiz_Click" />
+        <Button 
+            x:Name="btnCreateQuiz"
+            Grid.Column="1" 
+            Grid.Row="3" 
+            Content="Create Quiz" 
+            FontSize="30" 
+            FontWeight="UltraBlack" 
+            Width="250" 
+            HorizontalAlignment="Center" 
+            Margin="0,10"
+            Click="btnCreateQuiz_Click"/>
+        <Button 
+            x:Name="btnEditQuiz" 
+            Grid.Column="1" 
+            Grid.Row="4" 
+            Content="New Question" 
+            FontSize="30" 
+            FontWeight="UltraBlack" 
+            Width="250" 
+            HorizontalAlignment="Center" 
+            Margin="0,10" 
+            Click="btnEditQuiz_Click"/>
+        <Button 
+            x:Name="btnCloseGame" 
+            Grid.Column="1" 
+            Grid.Row="5" 
+            Content="Close Game" 
+            FontSize="30" 
+            FontWeight="UltraBlack" 
+            Width="250" 
+            HorizontalAlignment="Center" 
+            Margin="0,10" 
+            Click="btnCloseGame_Click"/>
+    </Grid>
+</Window>
+ 

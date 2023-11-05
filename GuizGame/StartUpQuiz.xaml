@@ -1,0 +1,90 @@
+﻿<Window x:Class="GuizGame.StartUpQuiz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuizGame"
+        mc:Ignorable="d"
+        Title="StartUpQuiz" Height="450" Width="800" Background="Coral">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Grid.Column="1" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="3" 
+            Text="QUIZ GAME" 
+            FontSize="50" 
+            FontWeight="Bold" 
+            HorizontalAlignment="Center"/>
+        <Button 
+            x:Name="btnGenerateQuiz" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            Grid.ColumnSpan="3"
+            Content="Generate Random Quiz" 
+            FontSize="30"
+            FontWeight="Bold" 
+            Width="auto" 
+            Height="auto" 
+            Margin="0,15"
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center" 
+            Click="btnGenerateQuiz_Click"/>
+        <TextBlock 
+            Grid.Column="1" 
+            Grid.Row="3" 
+            Grid.ColumnSpan="3"
+            Text="Or Choose 1 or more Categories" 
+            FontSize="20" 
+            FontWeight="Bold" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"/>
+        <ComboBox
+            x:Name="listBoxCategory" 
+            Grid.Column="2" 
+            Grid.Row="4" 
+            Grid.ColumnSpan="1" 
+            Height="40" 
+            VerticalAlignment="Top" 
+            ItemsSource="{Binding Categories}"
+            SelectionChanged="listBoxCategory_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox x:Name="ChoosenCategorie" 
+                                  Click="ChoosenCategorie_Click"
+                                  IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                  Content="{Binding}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button 
+            x:Name="btnStartGame" 
+            Grid.Column="1" 
+            Grid.Row="5" 
+            Grid.ColumnSpan="3" 
+            Width="300" 
+            Height="auto" 
+            Content="Start Game" 
+            FontSize="50" 
+            FontWeight="Bold" 
+            HorizontalAlignment="Center"
+            Click="btnStartGame_Click"/>
+    </Grid>
+</Window>

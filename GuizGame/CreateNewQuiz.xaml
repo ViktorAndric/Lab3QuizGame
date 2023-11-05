@@ -1,0 +1,137 @@
+﻿<Window x:Class="GuizGame.CreateNewQuiz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuizGame"
+        mc:Ignorable="d"
+        Title="CreateNewQuiz" Height="450" Width="800" Background="Coral">
+    <Grid Loaded="Grid_Loaded">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Grid.Column="2" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="3" 
+            Text="Create New Quiz" 
+            FontSize="40" 
+            FontWeight="Bold" 
+            HorizontalAlignment="Center"/>
+        <TextBox 
+            x:Name="txtQuizName" 
+            Grid.Column="3" 
+            Grid.Row="2"
+            Width="150"
+            Text="Quiz Name" 
+            FontSize="20" 
+            VerticalAlignment="Top" 
+            Margin="0,0,0,20" 
+            TextAlignment="Center"/>
+
+        <Image 
+            x:Name="Provisorisk" 
+            Grid.Column="3" 
+            Grid.Row="3"
+            Grid.RowSpan="3"
+            VerticalAlignment="Stretch"
+            Height="auto"
+            Width="200"
+            Source="CoolCatt.jpg"/>
+        <ComboBox 
+            x:Name="Statements"
+            Grid.Column="2"
+            Grid.Row="6"
+            Grid.ColumnSpan="3"
+            ItemsSource="{Binding allQuestions}" 
+            SelectionChanged="Statements_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                        <TextBlock Text="{Binding Statement}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ComboBox
+            x:Name="SelectedStatements"
+            Grid.Column="2"
+            Grid.Row="7"
+            Grid.ColumnSpan="3" 
+            SelectionChanged="SelectedStatements_SelectionChanged"
+            ItemsSource="{Binding selesctedStatements}"
+            >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Statement}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock
+            Name="NumberOfQuestions"
+            Grid.Column="3"
+            Grid.Row="8"
+            HorizontalAlignment="Center"
+            FontSize="20"
+            Text="You have choosen "
+            />
+        <Button
+            x:Name="btnSave"
+            Grid.Column="4"
+            Grid.Row="9"
+            Content="Save Question"
+            FontSize="20" Click="btnSave_Click"
+            />
+        <Button
+            x:Name="btnRemoveQuestion"
+            Grid.Column="4"
+            Grid.Row="10"
+            Content="Remove Question"
+            FontSize="20" Click="btnRemoveQuestion_Click"
+            
+            />
+        <Button
+            x:Name="btnMenu"
+            Grid.Column="2"
+            Grid.Row="10"
+            Content="Back to MainMenu"
+            FontSize="20" Click="btnMenu_Click"
+            />
+        <Button
+            x:Name="SaveQUiz"
+            Grid.Column="2"
+            Grid.Row="9"
+            Content="Save Quiz"
+            FontSize="20" Click="SaveQUiz_Click"
+            
+            />
+        
+
+
+
+    </Grid>
+</Window>
