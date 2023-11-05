@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +35,7 @@ namespace GuizGame
         public QuizPlay(string choosenGame, List<string> selectedCategory)
         {
             InitializeComponent();
+            this.DataContext = Quizes.allQuestions;
             ChoosenGame = choosenGame;
             SelectedCategory = selectedCategory;
             Choosengame(selectedCategory);
@@ -87,13 +90,39 @@ namespace GuizGame
             newQuiz.GetRandomQuestion();
             if (currentQuestion < newQuiz.choosenQuestions.Count)
             {
-                txtQuestion.Text = newQuiz.choosenQuestions[currentQuestion].Statement;
-                //QuizImage.Source = newQuiz.choosenQuestions[currentQuestion].ImagePath;
-                
-                Chooice1.Content = newQuiz.choosenQuestions[currentQuestion].Answers[0];
-                Chooice2.Content = newQuiz.choosenQuestions[currentQuestion].Answers[1];
-                Chooice3.Content = newQuiz.choosenQuestions[currentQuestion].Answers[2];
-                Chooice4.Content = newQuiz.choosenQuestions[currentQuestion].Answers[3];
+                var question = newQuiz.choosenQuestions[currentQuestion];
+
+                txtQuestion.Text = question.Statement;
+                Chooice1.Content = question.Answers[0];
+                Chooice2.Content = question.Answers[1];
+                Chooice3.Content = question.Answers[2];
+                Chooice4.Content = question.Answers[3];
+                string imagePath = question.ImagePath;
+
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    string fullImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagePath);
+                    fullImagePath = fullImagePath.Replace('/', '\\');
+
+                    var uri = new Uri(fullImagePath, UriKind.Absolute);
+                    if (File.Exists(fullImagePath)) 
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.UriSource = uri;
+                        bitmap.EndInit();
+                        QuizImage.Source = bitmap;
+                    }
+                    else
+                    {
+                        QuizImage.Source = null;
+                    }
+                }
+            }
+            else
+            {
+                QuizImage.Source = null;
             }
         }
         public void CategoryNextQuestion(List<string> chooice)
@@ -101,24 +130,48 @@ namespace GuizGame
             newQuiz.ChoosenCategories(chooice);
             if (currentQuestion < newQuiz.choosenQuestions.Count)
             {
-                txtQuestion.Text = newQuiz.choosenQuestions[currentQuestion].Statement;
-                //QuizImage.Source= newQuiz.choosenQuestions[currentQuestion].ImagePath;
+                var question = newQuiz.choosenQuestions[currentQuestion];
 
-                Chooice1.Content = newQuiz.choosenQuestions[currentQuestion].Answers[0];
-                Chooice2.Content = newQuiz.choosenQuestions[currentQuestion].Answers[1];
-                Chooice3.Content = newQuiz.choosenQuestions[currentQuestion].Answers[2];
-                Chooice4.Content = newQuiz.choosenQuestions[currentQuestion].Answers[3];
+                txtQuestion.Text = question.Statement;
+                Chooice1.Content = question.Answers[0];
+                Chooice2.Content = question.Answers[1];
+                Chooice3.Content = question.Answers[2];
+                Chooice4.Content = question.Answers[3];
+
+                string imagePath = question.ImagePath;
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    string fullImagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagePath);
+
+                    fullImagePath = fullImagePath.Replace('/', '\\');
+
+                    var uri = new Uri(fullImagePath, UriKind.Absolute);
+                    if (File.Exists(fullImagePath))
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.UriSource = uri;
+                        bitmap.EndInit();
+                        QuizImage.Source = bitmap;
+                    }
+                    else
+                    {
+                        QuizImage.Source = null;
+                    }
+                }
+            }
+            else
+            {
+                QuizImage.Source = null;
             }
         }
-
-      
         private double Percentage(int correctAnswers, int totalQuestions)
         {
             if(totalQuestions == 0.0)
             {
                 return 0.0;
             }
-
             return (double)correctAnswers / totalQuestions * 100;
         }
     }

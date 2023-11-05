@@ -61,16 +61,6 @@ namespace GuizGame
             ComboBoxStatements();
             ComboBoxSelectedQuestions();
         }
-        private void Statements_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-        private void SelectedStatements_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void SaveQUiz_Click(object sender, RoutedEventArgs e)
         {
             string category = txtQuizName.Text;
@@ -88,26 +78,19 @@ namespace GuizGame
                 {
                     Quizes.WriteFiles(selectedQuestions);
                     MessageBox.Show($"{category} has been saved");
-                    //string localAppData = Quizes.GetFolder();
-                    //string textfilePath = Path.Combine(localAppData, $"Questions.json");
-                    //var jsonFile = JsonConvert.SerializeObject(selectedQuestions, Formatting.Indented);
-                    //File.WriteAllText(textfilePath, jsonFile);
                 }
                 else
                 {
                     MessageBox.Show("Chose 10 questions to continue");
                 }
             }
-
         }
-
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
             MainWindow backToMenu = new MainWindow();
             backToMenu.Show();
             Close();
         }
-
         private void btnRemoveQuestion_Click(object sender, RoutedEventArgs e)
         {
                 selectedQuestions.Remove((Question)SelectedStatements.SelectedItem);

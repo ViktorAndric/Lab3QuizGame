@@ -1,4 +1,5 @@
 ﻿using GuizGame.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,21 +22,15 @@ namespace GuizGame
     public partial class EditQuestion : Window
     {
         public int selectedAnswer;
+        public string ImagePath;
         public EditQuestion()
         {
             InitializeComponent();
-            this.DataContext = Quizes.allQuestions;
             ComboBoxCategorie.ItemsSource = Quizes.Categories;   
+            
 
             //ComboBox.ItemsSource = Quiz. questions;
         }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-
         private void CheckAnswer_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox correctAnswer = (CheckBox)sender;
@@ -57,7 +52,7 @@ namespace GuizGame
                     Answer3.Text, 
                     Answer4.Text
                 };
-                string dataPath = "";
+                string dataPath = ImagePath;
                 Quizes.AddQuestion(category, statement, correctAnswer, dataPath, answerOptions);
                 MessageBox.Show("Question has been saved");
             }
@@ -108,6 +103,17 @@ namespace GuizGame
             MainWindow mainMenu = new MainWindow();
             mainMenu.Show();
             Close();
+        }
+
+        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ImagePath = openFileDialog.FileName;
+            }
         }
     }
 }

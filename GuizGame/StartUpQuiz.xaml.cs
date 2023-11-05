@@ -34,8 +34,6 @@ namespace GuizGame
     /// <summary>
     /// Interaction logic for StartUpQuiz.xaml
     /// </summary>
-
-   
     public partial class StartUpQuiz : Window
     {
         Quiz newQuiz = new Quiz();
@@ -69,7 +67,6 @@ namespace GuizGame
             QuizPlay Quizplay = new QuizPlay(choosenGame, selectedCategory);
             Quizplay.Show();
             Close();
-
         }
 
         private T FindFirstChildOfType<T>(DependencyObject parent) where T : DependencyObject

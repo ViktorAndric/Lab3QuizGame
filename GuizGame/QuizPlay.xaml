@@ -59,7 +59,8 @@
             Grid.ColumnSpan="3" 
             Width="400" 
             Height="200" 
-            Source="{Binding  ImagePath}"/>
+            Stretch="Uniform"
+            />
         <TextBlock 
             x:Name="txtQuestion"
             Text="{Binding Statement}" 
@@ -84,7 +85,7 @@
 
         <Button 
             x:Name="Chooice2" 
-            Content="Anser2" 
+            Content="Answer2" 
             Grid.Column="3" 
             Grid.Row="5" 
             FontSize="20" 

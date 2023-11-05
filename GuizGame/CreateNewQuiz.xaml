@@ -66,8 +66,7 @@
             Grid.Column="2"
             Grid.Row="6"
             Grid.ColumnSpan="3"
-            ItemsSource="{Binding allQuestions}" 
-            SelectionChanged="Statements_SelectionChanged">
+            ItemsSource="{Binding allQuestions}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                         <TextBlock Text="{Binding Statement}"/>
@@ -80,16 +79,14 @@
             Grid.Column="2"
             Grid.Row="7"
             Grid.ColumnSpan="3" 
-            SelectionChanged="SelectedStatements_SelectionChanged"
-            ItemsSource="{Binding selesctedStatements}"
-            >
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Statement}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
+            ItemsSource="{Binding selesctedStatements}">
+             <ComboBox.ItemTemplate>
+                 <DataTemplate>
+                     <StackPanel Orientation="Vertical">
+                         <TextBlock Text="{Binding Statement}"/>
+                     </StackPanel>
+                 </DataTemplate>
+             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBlock
             Name="NumberOfQuestions"

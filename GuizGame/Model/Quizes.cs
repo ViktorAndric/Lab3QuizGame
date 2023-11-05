@@ -18,9 +18,11 @@ namespace GuizGame.Model
         public static void AddQuestion(string category, string statement, int correctAnswer, string dataPath, string[] answers)
         {
             int id = allQuestions.Count + 1;
+            List<Question> newQuestions = new List<Question>();
             Question newQuestion = new Question(id, category, statement, correctAnswer, dataPath, answers);
+            newQuestions.Add(newQuestion);
             allQuestions.Add(newQuestion);
-            WriteFiles(allQuestions);
+            WriteFiles(newQuestions);
             if (!Categories.Contains(category))
             {
                 Categories.Add(category);
@@ -31,34 +33,38 @@ namespace GuizGame.Model
                 allStatements.Add(statement);
             }
         }
-        public static async Task<(List<Question> allQuestions, List<string> allStatements, List<string> Categories)> ReadFiles()
+        public static (List<Question> allQuestions, List<string> allStatements, List<string> Categories)ReadFiles()
         {
             string localAppData = GetFolder();
             string textfilePath = Path.Combine(localAppData, "Questions.json");
 
             if (File.Exists(textfilePath))
             {
-                string jsonData = await File.ReadAllTextAsync(textfilePath);
-                List<Question> existingQuestions = JsonConvert.DeserializeObject<List<Question>>(jsonData);
-
-                
-                foreach (var question in existingQuestions)
+                try
                 {
-                    if (!allQuestions.Any(q => q.Id == question.Id))
+                    string jsonData = File.ReadAllText(textfilePath);
+                    List<Question> existingQuestions = JsonConvert.DeserializeObject<List<Question>>(jsonData);
+
+                    foreach (var question in existingQuestions)
                     {
-                        allQuestions.Add(question);
-                    }
-                    if (!Categories.Contains(question.Category))
-                    {
-                        Categories.Add(question.Category);
-                    }
-                    if (!allStatements.Contains(question.Statement))
-                    {
-                        allStatements.Add(question.Statement);
+                        if (!allQuestions.Any(q => q.Id == question.Id))
+                        {
+                            allQuestions.Add(question);
+                        }
+                        if (!Categories.Contains(question.Category))
+                        {
+                            Categories.Add(question.Category);
+                        }
+                        if (!allStatements.Contains(question.Statement))
+                        {
+                            allStatements.Add(question.Statement);
+                        }
                     }
                 }
-               
-               
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
             }
             return (allQuestions, allStatements, Categories);
         }

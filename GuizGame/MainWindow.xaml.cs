@@ -24,11 +24,8 @@ namespace GuizGame
         public MainWindow()
         {
             InitializeComponent();
-            Quiz newQuiz = new Quiz();
-            Quizes.GetFolder();
             Quizes.ReadFiles();
-            //Quizes.WriteFiles();
-            //Quizes.ExistingQuestion();
+            Quizes.GetFolder();
         }
 
         private void btnSetupQuiz_Click(object sender, RoutedEventArgs e)

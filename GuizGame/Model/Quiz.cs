@@ -72,13 +72,6 @@ namespace GuizGame.Model
         {
 
         }
-
-
-
-
-
-
-
     }
 }
 
